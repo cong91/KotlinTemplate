@@ -1,5 +1,6 @@
 package vn.frghigh.template.di.modules
 
+import com.abhinav.newsapp.api.LiveDataCallAdapterFactory
 import com.github.ajalt.timberkt.Timber.i
 import vn.frghigh.template.utils.AppConstants
 import dagger.Module
@@ -20,7 +21,7 @@ class NetworkModule {
         return Retrofit.Builder()
                 .baseUrl(AppConstants.SERVER_URL)
                 .client(okHttpClient)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
     }
