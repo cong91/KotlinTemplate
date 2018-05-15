@@ -8,7 +8,6 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 /**
- * Created by abhinav.sharma on 08/11/17.
  * Live Data Call Adapter Factory for Retrofit
  * link: https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample
  */

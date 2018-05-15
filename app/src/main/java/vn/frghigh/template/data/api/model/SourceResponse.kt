@@ -2,9 +2,6 @@ package vn.frghigh.template.data.api.model
 
 import com.squareup.moshi.Json
 
-/**
- * Created by abhinav.sharma on 31/10/17.
- */
 
 data class SourceResponse(
         @Json(name = "status") var status: String?, //ok
@@ -12,7 +9,7 @@ data class SourceResponse(
 )
 
 data class Source(
-        @Json(name = "id") var id: String?, //abc-news-au
+        @Json(name = "id") var id: String, //abc-news-au
         @Json(name = "name") var name: String?, //ABC News (AU)
         @Json(name = "description") var description: String?, //Australia's most trusted source of local, national and world news. Comprehensive, independent, in-depth analysis, the latest business, sport, weather and more.
         @Json(name = "url") var url: String?, //http://www.abc.net.au/news

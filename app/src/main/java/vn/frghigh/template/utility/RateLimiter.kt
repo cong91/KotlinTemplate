@@ -5,9 +5,6 @@ import android.support.v4.util.ArrayMap
 import java.util.concurrent.TimeUnit
 
 
-/**
- * Created by abhinav.sharma on 06/11/17.
- */
 class RateLimiter<KEY>(timeout: Int, timeUnit: TimeUnit) {
     private val timestamps = ArrayMap<KEY, Long>()
     private val timeout: Long = timeUnit.toMillis(timeout.toLong())

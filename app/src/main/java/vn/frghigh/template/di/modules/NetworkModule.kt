@@ -1,6 +1,5 @@
 package vn.frghigh.template.di.modules
 
-import com.abhinav.newsapp.api.LiveDataCallAdapterFactory
 import com.github.ajalt.timberkt.Timber.i
 import vn.frghigh.template.utils.AppConstants
 import dagger.Module
@@ -8,8 +7,8 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import vn.frghigh.template.data.api.LiveDataCallAdapterFactory
 import javax.inject.Singleton
 
 @Module
