@@ -34,28 +34,24 @@ ext {
     // Android dependencies
     supportLibraryVersion = '27.1.0'
     constraintLayoutVersion = '1.0.2'
-    lifecycleVersion = '1.1.1'
-    roomVersion = '1.0.0'
-
+    //moshi
+    moshiKotlinVersion = "1.6.0"
     //Injection
-    daggerVersion = '2.15'
+    dagger2Version = '2.16'
+    //test
+    junitVersion = "4.12"
+    //room
+    archRoomVersion = "1.1.0"
+    // Lifecycle
+    archLifecycleVersion = "1.1.1"
 
-    // Reactive programming
-    rxJavaVersion = '2.1.12'
-    rxKotlinVersion = '2.2.0'
-    rxAndroidVersion = '2.0.2'
+    retrofitVersion = "2.3.0"
+    moshiConverterVersion = "2.3.0"
+    rxJavaAdapterVersion = "2.3.0"
+    rxAndroidVersion = "2.0.2"
+    rxJava2Version = "2.1.0"
 
-    // Network
-    retrofitVersion = '2.4.0'
-    okHttpVersion = '3.10.0'
-
-
-    timberktVersion = '1.3.0'
-    leakCanaryVersion = '1.5.4'
-
-    // Tests
-    junitVersion = '4.12'
-    mockitoVersion = '2.10.0'
-    espressoVersion = '3.0.1'
-    mockitoKotlinVersion = '1.5.0'
+    //testImpl
+    testRunnerVersion = "1.0.1"
+    testEspressoVersion = "3.0.1"
 }
