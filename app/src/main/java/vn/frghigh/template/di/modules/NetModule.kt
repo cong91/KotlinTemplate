@@ -10,10 +10,12 @@ import retrofit2.Retrofit.Builder
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import vn.frghigh.template.data.sources.remote.ApiInterface
+import vn.frghigh.template.utils.Constants
 import javax.inject.Singleton
+import kotlin.reflect.jvm.internal.impl.load.java.Constant
 
 @Module
-class NetModule(private val baseUrl: String) {
+class NetModule {
 
   @Provides
   @Singleton
@@ -21,19 +23,19 @@ class NetModule(private val baseUrl: String) {
 
   @Provides
   @Singleton
-  fun providesMoshi(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-
-  @Provides
-  @Singleton
-  fun providesRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
-    return Builder().client(okHttpClient).baseUrl(baseUrl)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-  }
+  fun providesMoshi(): Moshi = Moshi.Builder().add(com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory()).build()
 
   @Provides
   @Singleton
   fun providesApiInterface(retrofit: Retrofit): ApiInterface = retrofit.create(
           ApiInterface::class.java)
+
+  @Provides
+  @Singleton
+  fun providesRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
+    return Builder().client(okHttpClient).baseUrl(Constants.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+  }
 }

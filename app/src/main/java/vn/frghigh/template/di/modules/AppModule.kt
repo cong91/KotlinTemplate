@@ -1,39 +1,46 @@
 package vn.frghigh.template.di.modules
 
 import android.app.Application
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.migration.Migration
+import android.content.Context
 import dagger.Module
 import dagger.Provides
-import vn.frghigh.template.data.sources.local.CryptocurrenciesDao
+import dagger.android.AndroidInjectionModule
+import dagger.android.support.AndroidSupportInjectionModule
+import vn.frghigh.template.App
+import vn.frghigh.template.data.DataRepository
+import vn.frghigh.template.data.sources.local.MoviesDao
 import vn.frghigh.template.data.sources.local.Database
-import vn.frghigh.template.ui.CryptocurrenciesViewModelFactory
+import vn.frghigh.template.data.sources.remote.ApiInterface
+import vn.frghigh.template.di.modules.viewmodel.ViewModelModule
 import vn.frghigh.template.utils.Constants
 import vn.frghigh.template.utils.Utils
 import javax.inject.Singleton
 
 
 @Module
-class AppModule(val app: Application) {
+class AppModule{
 
     companion object {
         val MIGRATION_1_2: Migration = object : Migration(1, 2){
             override fun migrate(database: SupportSQLiteDatabase) {
                 // Change the table name to the correct one
-                database.execSQL("ALTER TABLE cryptocurrency RENAME TO cryptocurrencies")
+                database.execSQL("ALTER TABLE movie RENAME TO movies")
             }
         }
     }
 
     @Provides
     @Singleton
-    fun provideApplication(): Application = app
+    fun provideContext(app : App): Context {
+        return app.applicationContext
+    }
 
     @Provides
     @Singleton
-    fun provideCryptocurrenciesDatabase(app: Application): Database = Room.databaseBuilder(app,
+    fun provideDatabase(context: Context): Database = Room.databaseBuilder(context,
             Database::class.java, Constants.DATABASE_NAME)
             /*.addMigrations(MIGRATION_1_2)*/
             .fallbackToDestructiveMigration()
@@ -41,15 +48,17 @@ class AppModule(val app: Application) {
 
     @Provides
     @Singleton
-    fun provideCryptocurrenciesDao(
-            database: Database): CryptocurrenciesDao = database.cryptocurrenciesDao()
+    fun provideMoviesDao(database: Database): MoviesDao = database.moviesDao()
+
 
     @Provides
     @Singleton
-    fun provideCryptocurrenciesViewModelFactory(
-            factory: CryptocurrenciesViewModelFactory): ViewModelProvider.Factory = factory
+    fun provideUtils(context: Context): Utils = Utils(context)
+
 
     @Provides
     @Singleton
-    fun provideUtils(): Utils = Utils(app)
+    fun provideDataRepository(apiInterface: ApiInterface,
+                              moviesDao: MoviesDao, utils: Utils): DataRepository = DataRepository(apiInterface,moviesDao,utils)
+
 }

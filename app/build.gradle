@@ -42,6 +42,7 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:${moshiKotlinVersion}"
     //dagger2
     implementation "com.google.dagger:dagger-android:${dagger2Version}"
+    implementation "com.google.dagger:dagger-android-support:${dagger2Version}"
     kapt "com.google.dagger:dagger-compiler:${dagger2Version}"
     kapt "com.google.dagger:dagger-android-processor:${dagger2Version}"
     //Room
