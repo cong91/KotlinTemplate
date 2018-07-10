@@ -8,6 +8,6 @@ class Constants {
     const val START_ZERO_VALUE = "0"
     const val DATABASE_NAME = "cryptocurrencies_db"
     const val LIST_SCROLLING = 12
-    const val BASE_URL = ""
+    const val BASE_URL = "https://raw.githubusercontent.com/cong91/Sample-Data/master/"
   }
 }

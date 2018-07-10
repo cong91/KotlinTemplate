@@ -29,6 +29,7 @@ constructor(private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcard
         try {
             return creator.get() as T
         } catch (e: Exception) {
+            e.printStackTrace()
             throw RuntimeException(e)
         }
 

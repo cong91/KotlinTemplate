@@ -13,23 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package vn.frghigh.template.data.model
+package vn.frghigh.template.utils.exception
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-import com.squareup.moshi.Json
-import vn.frghigh.template.utils.extension.empty
-import java.io.Serializable
+/**
+ * Base Class for handling errors/failures/exceptions.
+ * Every feature specific failure should extend [FeatureFailure] class.
+ */
+sealed class Failure {
+    class NetworkConnection: Failure()
+    class ServerError: Failure()
 
-@Entity(tableName = "movies")
-data class Movie(
-        @Json(name = "id")
-        @PrimaryKey
-        @ColumnInfo(name = "id")
-        val id: Int,
-        @Json(name = "poster")
-        @ColumnInfo(name = "poster")
-        val poster: String) : Serializable {
-     fun empty() = Movie(0, String.empty())
+    /** * Extend this class for feature specific failures.*/
+    abstract class FeatureFailure: Failure()
 }

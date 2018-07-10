@@ -6,6 +6,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import vn.frghigh.template.di.modules.viewmodel.ViewModelKey
+import vn.frghigh.template.ui.sample.MoviesViewModel
 import vn.frghigh.template.utils.ViewModelFactory
 
 
@@ -13,10 +14,10 @@ import vn.frghigh.template.utils.ViewModelFactory
 abstract class ViewModelModule {
 
 //
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(MainViewModel::class)
-//    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(MoviesViewModel::class)
+    abstract fun bindMoviesViewModel(viewModel: MoviesViewModel): ViewModel
 //
 //    @Binds
 //    @IntoMap

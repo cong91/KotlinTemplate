@@ -1,5 +1,6 @@
 package vn.frghigh.template.data
 
+import android.util.Log
 import io.reactivex.Observable
 import vn.frghigh.template.data.model.Movie
 import vn.frghigh.template.data.model.MovieDetails
@@ -19,9 +20,10 @@ class DataRepository @Inject constructor(val apiInterface: ApiInterface,
         if (hasConnection) {
             observableFromApi = getMoviesFromApi()
         }
-        val observableFromDb = getMoviesFromDb()
-        return if (hasConnection) Observable.concatArrayEager(observableFromApi, observableFromDb)
-        else observableFromDb
+        return observableFromApi!!
+//        val observableFromDb = getMoviesFromDb()
+//        return if (hasConnection) Observable.concatArrayEager(observableFromApi, observableFromDb)
+//        else observableFromDb
     }
     fun getMoviesDetail(id : Int) : Observable<MovieDetails>{
         val hasConnection = utils.isConnectedToInternet()
@@ -55,10 +57,13 @@ class DataRepository @Inject constructor(val apiInterface: ApiInterface,
     }
 
 
-
+    private val TAG: String? = "DataRepository"
 
     private fun getMoviesFromApi(): Observable<List<Movie>>? {
-        return apiInterface.movies().doOnNext{ moviesDao.insertMovie(it)}
+
+        return apiInterface.movies().doOnNext{
+            moviesDao.insertMovie(it)
+        }
     }
 
 }
